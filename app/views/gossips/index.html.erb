@@ -1,0 +1,23 @@
+<div class="container">
+    <table class="table">
+        <thead><th>記事一覧</th></thead>
+        <tbody>
+            <tr>
+                <td>タイトル</td>
+                <td>ライター</td>
+            </tr>
+            <% @gossips.each do |gossip| %>
+                <tr>
+                    <td><%= link_to gossip.title, gossip_path(gossip) %></td>
+                    <td>@<%= gossip.user.name %></td>
+                    <% if permission_gossip?(gossip) %>
+                        <td><%= link_to '編集', edit_gossip_path(gossip) %>/<%= link_to '削除', gossip_path(gossip), method: :delete %></td>
+                    <% else %>
+                        <td>編集/削除</td>
+                    <% end %>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= paginate @gossips %>
+</div>

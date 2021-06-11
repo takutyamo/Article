@@ -1,0 +1,24 @@
+// Place all the styles related to the Gossips controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.bg-white{
+    background-color: white;
+}
+.margin-all{
+    margin: 10px 10px 10px 10px ;
+}
+.li-style-none{
+    list-style: none;
+}
+.comment-right{
+    text-align: right;
+}
+.comment-left{
+    text-align: left;
+}
+.ws{
+    white-space: normal;
+}
+.comment-box{
+    border-bottom: solid 1px gray;
+}

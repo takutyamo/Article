@@ -1,0 +1,11 @@
+<%= form_with model: @gossip, local: false do |f| %>
+    <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :content %>
+        <%= f.rich_text_area :content, class: "bg-white" %>
+    </div>
+    <%= f.submit "投稿", class: "btn btn-primary" %>
+<% end %>

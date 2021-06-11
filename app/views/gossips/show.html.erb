@@ -1,0 +1,74 @@
+<div class="container">
+<div class="row">
+    <div class="col-1">
+        <div>左</div>
+    </div>
+    <div class="col-8">
+        <div class="bg-white margin-all">
+            <h2><%= @gossip.title %></h2>
+            <div>
+                <%= @gossip.content %>
+            </div>
+        </div>
+        <div class="container bg-white">
+            <div>コメント</div>
+                <% @comments.each do |comment| %>
+                        <div class="comment-box">
+                            <div class="">
+                                <% if user_sign?(comment) %>
+                                    <% if comment.user.avatar.attached? %>
+                                        <%=  image_tag comment.user.avatar.variant(resize: "30x30"), class:"rounded-circle" %>
+                                    <% else %>
+                                        <%= image_tag 'はい.png', size: '30x30', class: "rounded-circle" %>
+                                    <% end %>
+                                    @<%= comment.user.name %>
+                                <% else %>
+                                    <%= image_tag 'はい.png', size: '30x30', class: "rounded-circle" %>
+                                    @退会済みユーザー
+                                <% end %>
+                            </div>
+                            <div class="ws">
+                                <%= comment.content %>
+                            </div>
+                        </div>
+                <% end %>
+            <% if logged_in? %>
+                <div class="margin-all bg-white">
+                <%= form_with model: @gossip.comments.build, url: gossip_comments_path(@gossip), local: false do |f| %>
+                    <div class="form-group">
+                    <%= f.label "コメントをする" %>
+                    <%= f.text_field :content, class: "form-control"%>
+                    </div>
+                    <%= f.submit 'コメントを送信', class: "btn btn-primary" %>
+                <% end %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="margin-all bg-white">
+            <div>
+            <% if @gossip.user.avatar.attached? %>
+                <%= image_tag @gossip.user.avatar.variant(resize: "100x100"), class: "rounded-circle" %>
+            <% else %>
+                <%= image_tag 'はい.png', size: '100x100', class: "rounded-circle" %>
+            <% end %>
+            </div>
+            <div>
+                <%= @gossip.user.name%>
+            </div>
+            <div>
+                <%= @gossip.user.comment%>
+            </div>
+        </div>
+        <div class="margin-all">
+            その他のゴシップ
+            <ul>
+                <% @gossips.each do |gossip| %>
+                <li><%= gossip.title%></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
